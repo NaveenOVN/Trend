@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         GITHUB_CREDENTIALS = credentials('github-creds')
-        DOCKER_IMAGE = "yourdockerhubusername/trend-app"
+        DOCKER_IMAGE = "nawin28/trend-app"
     }
 
     stages {

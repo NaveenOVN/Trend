@@ -1,0 +1,93 @@
+# Trendify – React Application Deployment
+
+## 📌 Overview
+Trendify is a React application deployed to a **production-ready state** using modern DevOps practices. The deployment pipeline integrates **Docker, Terraform, Jenkins, Kubernetes (AWS EKS), and Monitoring (Prometheus + Grafana)** to ensure scalability, automation, and observability.
+
+---
+
+## 🚀 Application
+- Repository: [Trendify GitHub Repo](https://github.com/NaveenOVN/Trend)
+- Runs on **port 3000**
+- Deployed via AWS EKS LoadBalancer:  
+
+
+---
+
+## 🐳 Docker
+- Created a **Dockerfile** to containerize the React app.
+- Built and tested locally:
+```bash
+docker build -t trend-app .
+docker run -p 3000:3000 trend-app
+
+Pushed to DockerHub:
+nawin28/trend-app (hub.docker.com in Bing)
+
+Terraform
+Defined infrastructure in main.tf:
+
+VPC
+
+IAM roles
+
+EC2 instances (for Jenkins)
+
+EKS cluster
+
+terraform init
+terraform apply
+
+Jenkins CI/CD
+Installed Jenkins with plugins: Docker, Git, Kubernetes, Pipeline.
+
+Configured GitHub webhook → auto build on commit.
+
+Declarative pipeline (Jenkinsfile) stages:
+
+Build Docker image
+
+Push to DockerHub
+
+Deploy to EKS using kubectl
+
+Kubernetes
+EKS cluster setup confirmed with:
+
+               kubectl get nodes
+
+Deployment and Service YAMLs created:
+
+deployment.yaml
+
+service.yaml
+
+Applied via Jenkins pipeline:
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+Monitoring
+               
+Installed Prometheus + Grafana + Alertmanager via Helm.
+
+Configured persistent volumes for Prometheus and Alertmanager.
+
+Grafana connected to Prometheus using:
+               
+http://prometheus-server.monitoring.svc.cluster.local:80
+               
+Imported dashboards:
+
+Node Exporter Full (ID: 1860) → Node-level metrics
+
+Kubernetes Cluster Monitoring (ID: 315) → Cluster-wide health
+
+
+GitHub Repo: https://github.com/NaveenOVN/Trend
+
+DockerHub Repo: nawin28/trend-app (hub.docker.com in Bing)
+
+Application URL:
+
+
+http://ac9308b8dc2bf4535b20e81b249e21c7-719803236.ap-south-1.elb.amazonaws.com

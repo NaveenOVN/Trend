@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        GITHUB_CREDENTIALS = credentials('github-creds')
-        DOCKER_IMAGE = "nawin28/trend-app"
+        GITHUB_CREDENTIALS    = credentials('github-creds')
+        DOCKER_IMAGE          = "nawin28/trend-app"
     }
 
     stages {
@@ -31,9 +31,14 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
+                sh '''
+                kubectl apply -f k8s/deployment.yaml --validate=false
+                kubectl apply -f k8s/service.yaml --validate=false
+                kubectl rollout restart deployment trend-app
+                kubectl get pods
+                '''
             }
         }
     }
 }
+
